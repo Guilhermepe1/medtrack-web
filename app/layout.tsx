@@ -1,4 +1,4 @@
-import type { Metadata } from 'next'
+import type { Metadata, Viewport } from 'next'
 import { Inter } from 'next/font/google'
 import './globals.css'
 
@@ -8,8 +8,13 @@ export const metadata: Metadata = {
   title:       'MedTrack Health AI',
   description: 'Seu copiloto inteligente de saúde',
   manifest:    '/manifest.json',
-  themeColor:  '#1A2A6C',
-  viewport:    'width=device-width, initial-scale=1, maximum-scale=1',
+}
+
+export const viewport: Viewport = {
+  themeColor:    '#1A2A6C',
+  width:         'device-width',
+  initialScale:  1,
+  maximumScale:  1,
 }
 
 export default function RootLayout({
