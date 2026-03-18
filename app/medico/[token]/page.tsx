@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'use'
+import { useState } from 'react'
 import { compartilharAPI } from '@/lib/api'
 import { Download, Stethoscope } from 'lucide-react'
 
