@@ -52,9 +52,7 @@ export const examesAPI = {
   listar: () => api.get('/exames/'),
 
   upload: (formData: FormData) =>
-    api.post('/exames/upload', formData, {
-      headers: { 'Content-Type': 'multipart/form-data' },
-    }),
+    api.post('/exames/upload', formData),
 
   excluir: (id: number) => api.delete(`/exames/${id}`),
 
