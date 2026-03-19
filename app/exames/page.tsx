@@ -56,7 +56,12 @@ export default function ExamesPage() {
       setArquivo(null)
       setPreview(null)
     } catch (err: any) {
-      setErro(err.response?.data?.detail || 'Erro ao processar o exame.')
+      const detail = err.response?.data?.detail
+      if (Array.isArray(detail)) {
+        setErro(detail.map((e: any) => e.msg || e.message || JSON.stringify(e)).join(', '))
+      } else {
+        setErro(typeof detail === 'string' ? detail : 'Erro ao processar o exame.')
+      }
     } finally {
       setLoading(false)
     }
