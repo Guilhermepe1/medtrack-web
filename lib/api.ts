@@ -51,8 +51,8 @@ export const dashboardAPI = {
 export const examesAPI = {
   listar: () => api.get('/exames/'),
 
-  upload: (formData: FormData) =>
-    api.post('/exames/upload', formData),
+  upload: (payload: object) =>
+    api.post('/exames/upload', payload),
 
   excluir: (id: number) => api.delete(`/exames/${id}`),
 

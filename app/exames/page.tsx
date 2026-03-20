@@ -43,15 +43,25 @@ export default function ExamesPage() {
     setLoading(true)
     setErro('')
 
-    const formData = new FormData()
-    formData.append('arquivo', arquivo)
-    if (meta.nome_exame)  formData.append('nome_exame',  meta.nome_exame)
-    if (meta.data_exame)  formData.append('data_exame',  meta.data_exame)
-    if (meta.medico)      formData.append('medico',      meta.medico)
-    if (meta.hospital)    formData.append('hospital',    meta.hospital)
+    // converte arquivo para base64
+    const base64 = await new Promise<string>((resolve, reject) => {
+      const reader = new FileReader()
+      reader.onload  = () => resolve((reader.result as string).split(',')[1])
+      reader.onerror = reject
+      reader.readAsDataURL(arquivo)
+    })
+
+    const payload = {
+      arquivo_nome: arquivo.name,
+      arquivo_b64:  base64,
+      nome_exame:   meta.nome_exame || null,
+      data_exame:   meta.data_exame || null,
+      medico:       meta.medico     || null,
+      hospital:     meta.hospital   || null,
+    }
 
     try {
-      const { data } = await examesAPI.upload(formData)
+      const { data } = await examesAPI.upload(payload)
       setResultado(data)
       setArquivo(null)
       setPreview(null)
